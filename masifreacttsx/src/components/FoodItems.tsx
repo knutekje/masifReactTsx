@@ -5,7 +5,7 @@ import { Box, CardHeader, Grid, Card, CardBody, CardFooter, Text, Heading,
     Button, Link,}
    from '@chakra-ui/react';
 import { useEffect, useState } from "react";
-
+import { SubmitReport } from "./SubmitReport";
 
 
 
@@ -134,6 +134,8 @@ return (
     <Tab onClick={handleClickReport}>Report</Tab>
     <Tab onClick={handleClickFoodItems}>FoodItems</Tab>
     <Tab onClick={handleClickIncident}>Incident</Tab>
+    <Tab>FormSubmit</Tab>
+
   </TabList>
 
   <TabPanels>
@@ -204,7 +206,11 @@ return (
 
   </Grid>
     </TabPanel>
+    <TabPanel>
+    <SubmitReport />
+  </TabPanel>
   </TabPanels>
+
 </Tabs>
 
 
