@@ -1,24 +1,28 @@
-
 import './App.css';
 import { Text, Button, Card, CardBody, CardHeader, Center, Grid, Heading } from '@chakra-ui/react';
-function App() {
-  let something = "var";
-  return (
-    <Center>
-<Grid alignSelf={"center"} alignContent={"center"} templateColumns='repeat(5, 1fr)' gap={6}>      
-      <Card margin-top={"10rem"}>
-      <CardHeader><Heading>Masif Heading yalls</Heading> </CardHeader>
-      <CardBody>
+import FoodItems from './components/FoodItems';
+import { useEffect } from 'react';
 
-        <Text> {something}</Text>
-      </CardBody>
-   <Button>
+
+function App() {
+
+
+
+
+
+
+
+
+          
+  return (
+    <>
+    <Center>
+      
     
-    Masif centered button
-   </Button>
-   </Card>
-   </Grid>
+   <FoodItems />
+
    </Center>
+   </>
   );
 }
 
