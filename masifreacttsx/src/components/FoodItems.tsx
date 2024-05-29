@@ -141,7 +141,7 @@ return (
   <TabPanels>
     <TabPanel>
     {/* Report Tab */}
-<Grid templateColumns='repeat(3, 1fr)' gap={3}>
+<Grid width={"25rem"} templateColumns='repeat(3, 1fr)' gap={3}>
   
   {report.map((item)=> (
     <Card key={item.id} marginTop={"2rem"} borderRadius={"1rem"}>
