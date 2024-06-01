@@ -92,7 +92,7 @@ function FoodItems(){
       } catch (error) {
           console.error('Some Error Occured:', error);
       }
-fetchFoodItems('http://localhost:5223/api/FoodItem');
+fetchFoodItems('http://192.168.100.109:5223/api/FoodItem');
     }
 
     async function fetchReports(url: string): Promise<any> {
@@ -180,7 +180,8 @@ return (
  
   </CardBody>
   <CardFooter>
- 
+  <Button onClick={() => deleteFoodItem(item.id)} value={item.id} >DELETE</Button>
+
   </CardFooter>
   </Card>
 ))}
