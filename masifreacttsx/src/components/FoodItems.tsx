@@ -1,6 +1,6 @@
 
 
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { Tab, TabList, TabPanel, TabPanels, Tabs, Image } from "@chakra-ui/react";
 import { Box, CardHeader, Grid, Card, CardBody, CardFooter, Text, Heading,
     Button, Link,}
    from '@chakra-ui/react';
@@ -70,6 +70,31 @@ function FoodItems(){
       }
     }
 
+    async function deleteFoodItems(url: string): Promise<any> {
+      
+      try {
+        const response = await fetch(url, {
+          method: 'DELETE',
+          headers: {
+            Accept: 'application/json'
+            
+          }
+        });
+          if (!response.ok) {
+            console.log("failed response")
+              throw new Error(
+                  `Unable to Fetch Data, Please check URL
+                  or Network connectivity!!`
+              );
+          }
+          const data = await response.json();
+          
+      } catch (error) {
+          console.error('Some Error Occured:', error);
+      }
+fetchFoodItems('http://localhost:5223/api/FoodItem');
+    }
+
     async function fetchReports(url: string): Promise<any> {
       try {
           const response = await fetch(url);
@@ -115,7 +140,10 @@ function handleClickReport(){
   fetchReports('http://localhost:5223/api/Report');
  
 }
-
+function deleteFoodItem(id: number){
+  deleteFoodItems('http://localhost:5223/api/FoodItem/' + id);
+ 
+}
 
 function handleClickIncident(){
   fetchIncidents('http://localhost:5223/api/Incident');
@@ -127,9 +155,8 @@ return (
     
 
   
-<Box>
 
-<Tabs>
+<Tabs variant='soft-rounded' colorScheme='green'>
   <TabList>
     <Tab onClick={handleClickReport}>Report</Tab>
     <Tab onClick={handleClickFoodItems}>FoodItems</Tab>
@@ -141,16 +168,16 @@ return (
   <TabPanels>
     <TabPanel>
     {/* Report Tab */}
-<Grid width={"25rem"} templateColumns='repeat(3, 1fr)' gap={3}>
+<Grid width={"25rem"} templateColumns='repeat(2, 1fr)' gap={3}>
   
   {report.map((item)=> (
     <Card key={item.id} marginTop={"2rem"} borderRadius={"1rem"}>
-      <Link><CardHeader backgroundColor={"teal"} borderRadius={"1rem"}><Heading size='md'> {item.incidentDate}</Heading></CardHeader></Link>
+      <Link><CardHeader backgroundColor={"#789d6d"} borderRadius={"1rem"}><Heading size='md'> {item.incidentDate}</Heading></CardHeader></Link>
 
   <CardBody>
     <Text textOverflow={"clip"} flexWrap={"wrap"}>{item.foodID}</Text>
+    <Text textOverflow={"clip"} flexWrap={"wrap"}>{item.description}</Text>
  
-    
   </CardBody>
   <CardFooter>
  
@@ -164,21 +191,23 @@ return (
 
     {/* FoodItem Tab */}
     <TabPanel>
-    <Grid templateColumns='repeat(3, 1fr)' gap={3}>
+    <Grid width={"25rem"} templateColumns='repeat(2, 1fr)' gap={3}>
   
   {foodItem.map((item)=> (
-    <Card key={item.id} marginTop={"2rem"} borderRadius={"1rem"}>
-      <Link><CardHeader backgroundColor={"teal"} borderRadius={"1rem"}><Heading size='md'> {item.title}</Heading></CardHeader></Link>
+    <Card backgroundColor={"#a4bd9d"} key={item.id} marginTop={"2rem"} borderRadius={"1rem"}>
+      <Link><CardHeader backgroundColor={"#789d6d"} borderRadius={"1rem"}><Heading size='md'> {item.title}</Heading></CardHeader></Link>
 
-  <CardBody>
+  <CardBody >
     <Text textOverflow={"clip"} flexWrap={"wrap"}>{item.price}</Text>
     <Text textOverflow={"clip"} flexWrap={"wrap"}>{item.unit}</Text>
     <Text textOverflow={"clip"} flexWrap={"wrap"}>{item.supplier}</Text>
     <Text textOverflow={"clip"} flexWrap={"wrap"}>{item.externalID}</Text>
-    
+
+  
   </CardBody>
   <CardFooter>
- 
+    <Button onClick={() => deleteFoodItem(item.id)} value={item.id} >DELETE</Button>
+    
   </CardFooter>
   </Card>
 ))}
@@ -187,11 +216,11 @@ return (
     </TabPanel>
     {/* Incident Tab */}
     <TabPanel> 
-    <Grid templateColumns='repeat(3, 1fr)' gap={3}>
+    <Grid width={"25rem"}  templateColumns='repeat(3, 1fr)' gap={3}>
   
   {incident.map((item)=> (
     <Card key={item.id} marginTop={"2rem"} borderRadius={"1rem"}>
-      <Link><CardHeader backgroundColor={"teal"} borderRadius={"1rem"}><Heading size='md'> {item.incidentDate}</Heading></CardHeader></Link>
+      <Link><CardHeader backgroundColor={"#789d6d"} borderRadius={"1rem"}><Heading size='md'> {item.incidentDate}</Heading></CardHeader></Link>
 
   <CardBody>
     <Text textOverflow={"clip"} flexWrap={"wrap"}>{item.foodID}</Text>
@@ -205,9 +234,11 @@ return (
 ))}
 
   </Grid>
+  
     </TabPanel>
     <TabPanel>
-    <SubmitReport />
+    <Grid width={"25rem"} ><SubmitReport /></Grid>
+    
   </TabPanel>
   </TabPanels>
 
@@ -215,7 +246,6 @@ return (
 
 
 
-</Box>
 
 
 
