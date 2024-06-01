@@ -1,7 +1,7 @@
 
 import { Formik, Field, Form, FormikHelpers } from 'formik';
 import { Button } from '@chakra-ui/button';
-import { Card } from '@chakra-ui/react';
+import { Card, TabPanel } from '@chakra-ui/react';
  
  interface Values {
   pictureId: string,
@@ -21,7 +21,7 @@ var today = new Date();
   
 
    return (
-     <div>
+     <TabPanel>
        <h1>Signup</h1>
        <Formik
          initialValues={{
@@ -84,7 +84,7 @@ var today = new Date();
          </Form>
          </Card>
        </Formik>
-     </div>
+     </TabPanel>
    );
  };
 

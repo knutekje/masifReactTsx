@@ -1,7 +1,7 @@
 import { Text, Button, Card, CardBody, CardHeader, Center, Grid, Heading } from '@chakra-ui/react';
-import FoodItems from './components/FoodItems';
-import MainTab from './components/MainTab';
+
 import { Header } from './components/Header';
+import TabNav from './components/TabNav';
 
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
       <Grid>
 
         <Header />
-        <FoodItems />
+        <TabNav />
   
         </Grid>
    </Center>
