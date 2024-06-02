@@ -1,4 +1,4 @@
-import { Grid, Tab, TabList, TabPanels, Tabs } from "@chakra-ui/react";
+import { Grid, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import Report from "./Report";
 import Incident from "./Incident";
 import FoodItems from "./FoodItems";
@@ -20,8 +20,9 @@ function TabNav(){
         <Report/>
         <FoodItems/>
         <Incident/>
+        <TabPanel>
         <SubmitReport/>
-        
+        </TabPanel>
 
   </TabPanels>
 

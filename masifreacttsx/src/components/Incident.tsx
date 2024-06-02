@@ -38,7 +38,6 @@ function Incident(){
         fetchIncidents('http://localhost:5223/api/Incident');
        
       }
-      fetchIncidents('http://localhost:5223/api/Incident');
       
     return(   <TabPanel onClick={handleClickIncident}> 
         <Grid width={"25rem"}  templateColumns='repeat(3, 1fr)' gap={3}>

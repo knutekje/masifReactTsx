@@ -26,8 +26,12 @@ function FoodItems(){
 
    
    
-    async function fetchFoodItems(url: string): Promise<any> {
-      try {
+    async function fetchFoodItems(action: string, id: any): Promise<any> {
+      let url = 'http://localhost:5223/api/FoodItem'
+      switch(action){
+        case "fetch":
+
+        try {
           const response = await fetch(url);
           if (!response.ok) {
             console.log("failed response")
@@ -41,51 +45,64 @@ function FoodItems(){
       } catch (error) {
           console.error('Some Error Occured:', error);
       }
-    }
+    
 
-    async function deleteFoodItems(url: string): Promise<any> {
-      
-      try {
-        const response = await fetch(url, {
-          method: 'DELETE',
-          headers: {
-            Accept: 'application/json'
-            
-          }
-        });
-          if (!response.ok) {
-            console.log("failed response")
-              throw new Error(
-                  `Unable to Fetch Data, Please check URL
-                  or Network connectivity!!`
-              );
-          }
-          const data = await response.json();
-          alert(data)
+
+        
+          break;
+        case "delete":
+        
+        try {
           
-      } catch (error) {
-          console.error('Some Error Occured:', error);
-      }
-fetchFoodItems('http://192.168.100.109:5223/api/FoodItem');
-    }
-
-   
-
-       
+          const response = await fetch(url + "/" +id, {
+            method: 'DELETE',
+            headers: {
+              Accept: 'application/json'
+              
+            }
+          });
+            if (!response.ok) {
+              console.log("failed response")
+                throw new Error(
+                    `Unable to Fetch Data, Please check URL
+                    or Network connectivity!!`
+                );
+            }
+            const data = await response.json();
+            alert(data)
+            
+        } catch (error) {
+            console.error('Some Error Occured:', error);
+        }
+            fetchFoodItems("fetch", 0);
+      
+          break;
+        default:
+          break;
+      }}
+        
             
      
-function handleClickFoodItems(){
-  fetchFoodItems('http://localhost:5223/api/FoodItem');
+function handleClickFoodItems(action: string, id: number){
  
+  switch(action){
+  case "delete":
+    fetchFoodItems("delete", id);
+    break;
+  case "fetch":
+    fetchFoodItems("fetch", 0);
+    break;
+  default:
+    break;
 }
 
 
-function deleteFoodItem(id: number){
-  deleteFoodItems('http://localhost:5223/api/FoodItem/' + id);
  
 }
 
-fetchFoodItems('http://localhost:5223/api/FoodItem');
+const load = () => {
+  fetchFoodItems("fetch", 0);
+}
 
       
 
@@ -95,7 +112,7 @@ return (
   
 
 
-    <TabPanel onClick={handleClickFoodItems}>
+    <TabPanel onClick={() => handleClickFoodItems("fetch", 0)}>
     <Grid width={"25rem"} templateColumns='repeat(2, 1fr)' gap={3}>
   
   {foodItem.map((item)=> (
@@ -111,7 +128,7 @@ return (
   
   </CardBody>
   <CardFooter>
-    <Button onClick={() => deleteFoodItem(item.id)} value={item.id} >DELETE</Button>
+    <Button onClick={() => handleClickFoodItems("delete", item.id)} value={item.id} >DELETE</Button>
     
   </CardFooter>
   </Card>
@@ -119,15 +136,6 @@ return (
 
   </Grid>
     </TabPanel>
-    
-
-  
-   
-
-
-
-
-
 
 )
 } 

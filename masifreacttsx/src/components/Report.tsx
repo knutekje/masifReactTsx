@@ -1,4 +1,4 @@
-import {  TabPanel } from "@chakra-ui/react";
+import {  Grid, TabPanel } from "@chakra-ui/react";
 import { CardHeader, Card, CardBody, CardFooter, Text, Heading,
      Link,}
    from '@chakra-ui/react';
@@ -20,6 +20,17 @@ interface reportInterface {
 
 
 function Report(){
+
+  interface foodInterface {
+    id: number;
+    title: string,
+    price: number,
+    unit: string,
+    supplier: string;
+    externalID: string;
+    }
+  
+
     const [report, setReport] = useState<Array<reportInterface>>([]);
 
     async function fetchReports(url: string): Promise<any> {
@@ -43,10 +54,10 @@ function Report(){
        
       }
 
-    fetchReports('http://localhost:5223/api/Report');
 
     return(    
       <div>
+         <Grid width={"25rem"}  templateColumns='repeat(3, 1fr)' gap={3}>
         <TabPanel onClick={handleClickReport}>
       {report.map((item)=> (
         <Card key={item.id} marginTop={"2rem"} borderRadius={"1rem"}>
@@ -63,6 +74,7 @@ function Report(){
       </Card>
     ))}
     </TabPanel>
+    </Grid>
       </div>)
 
 }

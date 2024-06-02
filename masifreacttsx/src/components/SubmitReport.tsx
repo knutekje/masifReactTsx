@@ -1,7 +1,8 @@
 
 import { Formik, Field, Form, FormikHelpers } from 'formik';
 import { Button } from '@chakra-ui/button';
-import { Card, TabPanel } from '@chakra-ui/react';
+import { Card, Grid, TabPanel } from '@chakra-ui/react';
+import { useState } from 'react';
  
  interface Values {
   pictureId: string,
@@ -13,16 +14,26 @@ import { Card, TabPanel } from '@chakra-ui/react';
   description: string;
 }
 
+
+
+
+
+
 var today = new Date();
  
  
  export const SubmitReport = () => {
-
+  
   
 
+   function setFieldValue(arg0: string, arg1: any) {
+     throw new Error('Function not implemented.');
+   }
+
    return (
-     <TabPanel>
-       <h1>Signup</h1>
+     <div>
+       <Grid width={"25rem"}  templateColumns='repeat(1, 1fr)' gap={3}>
+
        <Formik
          initialValues={{
           pictureId: '',
@@ -39,7 +50,7 @@ var today = new Date();
            { setSubmitting }: FormikHelpers<Values>
          ) => {
            setTimeout(() => {
-           
+            console.log(values)
             
               fetch("http://localhost:5223/api/Report",{
                 method: 'POST',
@@ -49,7 +60,7 @@ var today = new Date();
                 },
                 body: JSON.stringify({
                   pictureId: values.pictureId,
-                  reportedDate: today.getDate,
+                  reportedDate: Date.now,
                   incidentDate: values.incidentDate,
                   quantity: values.quantity,
                   userID: 0,
@@ -63,13 +74,12 @@ var today = new Date();
        >
         <Card>
          <Form>
-           <label htmlFor="pictureId">pictureId pictureId</label>
-           <Field id="pictureId" name="pictureId" placeholder="John" />
+           
  
-           <label htmlFor="quantity">quantity Name</label>
+           <label htmlFor="quantity">quantity </label>
            <Field id="quantity" type="number" name="quantity" placeholder="Doe" />
 
-           <label htmlFor="incidentDate">incidentDate Name</label>
+           <label htmlFor="incidentDate">incidentDate </label>
            <Field id="incidentDate" type="date" name="incidentDate" placeholder="Doe" />
  
            <label htmlFor="description">description</label>
@@ -79,12 +89,37 @@ var today = new Date();
              placeholder="john@acme.com"
              type="text"
            />
+           <select
+        name="colors"
+   
+        style={{ display: "block" }}
+      >
+        <option value="" label="Select a color">
+          Select a color{" "}
+        </option>
+        <option value="red" label="red">
+          {" "}
+          red
+        </option>
+        <option value="blue" label="blue">
+          blue
+        </option>
+        
+        <option value="green" label="green">
+          green
+        </option>
+      </select>
+ 
+ <input id="pictureId" name="pictureId" type="file" value="" onChange={(event) => { if(event.currentTarget.files != null)
+  setFieldValue("file", event.currentTarget.files[0]);
+}} />
  
            <Button type="submit">Submit</Button>
          </Form>
          </Card>
        </Formik>
-     </TabPanel>
+       </Grid>
+     </div>
    );
  };
 
