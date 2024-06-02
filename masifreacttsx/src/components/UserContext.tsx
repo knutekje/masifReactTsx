@@ -8,7 +8,7 @@ interface UserState{
 }
 
 type StateContextType = {
-  activeMenu: boolean;
+  user: UserState;
   setActiveMenu: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -21,10 +21,14 @@ type ContextProviderProps = {
 };
 
 export const ContextProvider = ({ children }: ContextProviderProps) => {
-  const [activeMenu, setActiveMenu] = useState(true);
+  const [user, setUser] = useState({
+  loggedinIn: false;
+  userid: 0;
+  username: "";
+});
   const value = {
-    activeMenu,
-    setActiveMenu,
+    user,
+    setUser,
   };
 
   return (
