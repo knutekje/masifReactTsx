@@ -23,7 +23,7 @@ function FoodItems(){
 
     const [foodItem, setFoodItem] = useState<Array<foodInterface>>([]);
 
-
+  
    
    
     async function fetchFoodItems(action: string, id: any): Promise<any> {
@@ -100,11 +100,6 @@ function handleClickFoodItems(action: string, id: number){
  
 }
 
-const load = () => {
-  fetchFoodItems("fetch", 0);
-}
-
-      
 
 return (
     
@@ -139,4 +134,6 @@ return (
 
 )
 } 
+
+export const load = () =>{FoodItems()}
 export default FoodItems;

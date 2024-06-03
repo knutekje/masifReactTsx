@@ -3,13 +3,14 @@ import Report from "./Report";
 import Incident from "./Incident";
 import FoodItems from "./FoodItems";
 import { SubmitReport } from "./SubmitReport";
+import { load } from "./FoodItems";
 
 
 function TabNav(){
     return(<Tabs variant='soft-rounded' colorScheme='green'>
     <TabList>
       <Tab>Report</Tab>
-      <Tab>FoodItems</Tab>
+      <Tab onClick={load}>FoodItems</Tab>
       <Tab>Incident</Tab>
       <Tab>FormSubmit</Tab>
   

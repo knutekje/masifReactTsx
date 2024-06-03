@@ -1,20 +1,23 @@
 
 import React, { createContext, useState } from 'react';
 
-interface UserState{
+export interface UserStateInterface{
   loggedinIn: boolean;
   userid: number;
   username: string;
 }
 
 type StateContextType = {
-  user: UserState;
-  setActiveMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  user: UserStateInterface;
+  setUser: React.Dispatch<React.SetStateAction<UserStateInterface>>;
 };
+
 
 export const StateContext = createContext<StateContextType>(
   null as unknown as StateContextType,
 );
+
+
 
 type ContextProviderProps = {
   children: React.ReactNode;
@@ -22,16 +25,14 @@ type ContextProviderProps = {
 
 export const ContextProvider = ({ children }: ContextProviderProps) => {
   const [user, setUser] = useState({
-  loggedinIn: false;
-  userid: 0;
-  username: "";
+    
+  loggedinIn: false,
+  userid: 0,
+  username: "string",
 });
-  const value = {
-    user,
-    setUser,
-  };
+
 
   return (
-    <StateContext.Provider value={value}>{children}</StateContext.Provider>
+    <StateContext.Provider value={{user, setUser}}>{children}</StateContext.Provider>
   );
 };
