@@ -56,9 +56,9 @@ function Report(){
 
 
     return(    
-      <div>
+      <TabPanel onClick={handleClickReport}>
+
          <Grid width={"25rem"}  templateColumns='repeat(3, 1fr)' gap={3}>
-        <TabPanel onClick={handleClickReport}>
       {report.map((item)=> (
         <Card key={item.id} marginTop={"2rem"} borderRadius={"1rem"}>
           <Link><CardHeader backgroundColor={"#789d6d"} borderRadius={"1rem"}><Heading size='md'> {item.incidentDate}</Heading></CardHeader></Link>
@@ -73,9 +73,9 @@ function Report(){
       </CardFooter>
       </Card>
     ))}
-    </TabPanel>
     </Grid>
-      </div>)
-
+    </TabPanel>
+    
+    )
 }
 export default Report;
