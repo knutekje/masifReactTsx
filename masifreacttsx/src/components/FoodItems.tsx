@@ -8,11 +8,7 @@ import {  useState } from "react";
 
 
 
-
-
-function FoodItems(){
-
-  interface foodInterface {
+interface foodInterface {
   id: number;
   title: string,
   price: number,
@@ -20,6 +16,10 @@ function FoodItems(){
   supplier: string;
   externalID: string;
   }
+
+export const FoodItems = () => {
+
+ 
 
     const [foodItem, setFoodItem] = useState<Array<foodInterface>>([]);
 
@@ -103,10 +103,6 @@ function handleClickFoodItems(action: string, id: number){
 
 return (
     
-
-  
-
-
     <TabPanel onClick={() => handleClickFoodItems("fetch", 0)}>
     <Grid width={"25rem"} templateColumns='repeat(2, 1fr)' gap={3}>
   
@@ -123,7 +119,7 @@ return (
   
   </CardBody>
   <CardFooter>
-    <Button onClick={() => handleClickFoodItems("delete", item.id)} value={item.id} >DELETE</Button>
+    <Button onClick={() => handleClickFoodItems("delete", item.id)} value={item.id}>DELETE</Button>
     
   </CardFooter>
   </Card>
@@ -135,5 +131,3 @@ return (
 )
 } 
 
-export const load = () =>{FoodItems()}
-export default FoodItems;

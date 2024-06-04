@@ -1,38 +1,38 @@
 
-import React, { createContext, useState } from 'react';
+import React, { useState } from 'react';
 
-export interface UserStateInterface{
-  loggedinIn: boolean;
-  userid: number;
-  username: string;
+export function createContext<T>() {
+  const context = React.createContext<T | undefined>(undefined);
+
+  const useContext = () => {
+    const value = React.useContext(context);
+    if (value === undefined) {
+      throw new Error(
+        `useContext must be used inside a Provider with a value that's not undefined`,
+      );
+    }
+    return value;
+  };
+  return [useContext, context.Provider] as const;
 }
 
 type StateContextType = {
-  user: UserStateInterface;
-  setUser: React.Dispatch<React.SetStateAction<UserStateInterface>>;
+  activeMenu: boolean;
+  setActiveMenu: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-
-export const StateContext = createContext<StateContextType>(
-  null as unknown as StateContextType,
-);
-
-
+export const [useContext, Provider] = createContext<StateContextType>();
 
 type ContextProviderProps = {
   children: React.ReactNode;
 };
 
 export const ContextProvider = ({ children }: ContextProviderProps) => {
-  const [user, setUser] = useState({
-    
-  loggedinIn: false,
-  userid: 0,
-  username: "string",
-});
+  const [activeMenu, setActiveMenu] = useState(true);
+  const value = {
+    activeMenu,
+    setActiveMenu,
+  };
 
-
-  return (
-    <StateContext.Provider value={{user, setUser}}>{children}</StateContext.Provider>
-  );
+  return <Provider value={value}>{children}</Provider>;
 };
