@@ -1,8 +1,9 @@
-import {  Grid, TabPanel } from "@chakra-ui/react";
+import {  Button, Grid, TabPanel } from "@chakra-ui/react";
 import { CardHeader, Card, CardBody, CardFooter, Text, Heading,
      Link,}
    from '@chakra-ui/react';
-import {  useState } from "react";
+import {  SetStateAction, useContext, useState } from "react";
+import { AuthContext } from "./UserContext";
 
 
 interface reportInterface {
@@ -53,19 +54,22 @@ function Report(){
         fetchReports('http://localhost:5223/api/Report');
        
       }
-
+    
 
     return(    
       <TabPanel onClick={handleClickReport}>
-
-         <Grid width={"25rem"}  templateColumns='repeat(3, 1fr)' gap={3}>
+        
+         <Grid  width={"25rem"}  templateColumns='repeat(1, 1fr)' gap={3}>
       {report.map((item)=> (
-        <Card key={item.id} marginTop={"2rem"} borderRadius={"1rem"}>
+        <Card borderWidth={"0.3rem"} borderColor={"black"} backgroundColor={"#a4bd9d"} key={item.id} marginTop={"2rem"} borderRadius={"1rem"}>
           <Link><CardHeader backgroundColor={"#789d6d"} borderRadius={"1rem"}><Heading size='md'> {item.incidentDate}</Heading></CardHeader></Link>
     
       <CardBody>
-        <Text textOverflow={"clip"} flexWrap={"wrap"}>{item.foodID}</Text>
+        <Text textOverflow={"clip"} flexWrap={"wrap"}>{item.quantity}</Text>
         <Text textOverflow={"clip"} flexWrap={"wrap"}>{item.description}</Text>
+        <Text textOverflow={"clip"} flexWrap={"wrap"}>{item.reportedDate}</Text>
+
+        
      
       </CardBody>
       <CardFooter>
@@ -79,3 +83,7 @@ function Report(){
     )
 }
 export default Report;
+
+function isAuthenticated(value: SetStateAction<number>): void {
+  throw new Error("Function not implemented.");
+}

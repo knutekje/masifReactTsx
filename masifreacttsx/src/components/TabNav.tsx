@@ -4,12 +4,13 @@ import Incident from "./Incident";
 import { FoodItems } from "./FoodItems";
 import { SubmitReport } from "./SubmitReport";
 import { useContext } from "react";
+import { AuthContext } from "./UserContext";
 
 
 export const TabNav =  () =>   {
-  
+  let something = useContext(AuthContext);
+  console.log(something.isAuthenticated)
 return(
- 
 <Tabs>
   <TabList>
     <Tab>Report</Tab>
@@ -18,16 +19,17 @@ return(
     <Tab>Submitreport</Tab>
    
   </TabList>
-
+  
   <TabPanels>
     
     <Report/>
+  {/*   <TabPanel>
+    <Basic/>
+    </TabPanel> */}
     <Incident/>
     <FoodItems/>
     
-    <TabPanel>
      <SubmitReport/>
-    </TabPanel>
     
   </TabPanels>
 </Tabs>
