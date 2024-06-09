@@ -8,11 +8,9 @@ import { AuthContext } from "./UserContext";
 
 
 export const TabNav =  () =>   {
-  let something = useContext(AuthContext);
-  console.log(something.isAuthenticated)
 return(
-<Tabs>
-  <TabList>
+<Tabs variant='soft-rounded' colorScheme='green'>
+  <TabList marginTop={"1rem"}>
     <Tab>Report</Tab>
     <Tab>Incident</Tab>
     <Tab>Fooditems</Tab>
@@ -23,9 +21,7 @@ return(
   <TabPanels>
     
     <Report/>
-  {/*   <TabPanel>
-    <Basic/>
-    </TabPanel> */}
+
     <Incident/>
     <FoodItems/>
     

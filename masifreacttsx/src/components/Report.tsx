@@ -59,9 +59,9 @@ function Report(){
     return(    
       <TabPanel onClick={handleClickReport}>
         
-         <Grid  width={"25rem"}  templateColumns='repeat(1, 1fr)' gap={3}>
+         <Grid  width={"inherit"}  templateColumns='repeat(1, 1fr)' gap={3} marginTop={"0.5rem"}>
       {report.map((item)=> (
-        <Card borderWidth={"0.3rem"} borderColor={"black"} backgroundColor={"#a4bd9d"} key={item.id} marginTop={"2rem"} borderRadius={"1rem"}>
+        <Card borderWidth={"0.1rem"} borderColor={"black"} backgroundColor={"#a4bd9d"} key={item.id}  borderRadius={"1rem"}>
           <Link><CardHeader backgroundColor={"#789d6d"} borderRadius={"1rem"}><Heading size='md'> {item.incidentDate}</Heading></CardHeader></Link>
     
       <CardBody>

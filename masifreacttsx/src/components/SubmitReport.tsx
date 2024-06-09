@@ -25,7 +25,7 @@ var today = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
    return (
      <TabPanel>
-       <Grid width={"25rem"}  templateColumns='repeat(1, 1fr)' gap={3}>
+       <Grid width={"inherit"}  templateColumns='repeat(1, 1fr)' gap={3}>
 
        <Formik
          initialValues={{
@@ -52,7 +52,7 @@ var today = new Date().toISOString().slice(0, 19).replace('T', ' ');
                 },
                 body: JSON.stringify({
                   pictureId: values.pictureId,
-                  reportedDate: today,
+                  //reportedDate: '',
                   incidentDate: values.incidentDate,
                   quantity: values.quantity,
                   userID: 0,
@@ -64,14 +64,14 @@ var today = new Date().toISOString().slice(0, 19).replace('T', ' ');
            }, 0);
          }}
        >
-        <Card border={"Highlight"} backgroundColor={"#a4bd9d"} marginTop={"2rem"} borderRadius={"1rem"}>
-        <CardHeader backgroundColor={"#789d6d"} borderRadius={"1rem"}><Heading size='md'>Register waste</Heading></CardHeader>
+        <Card borderWidth={"0.1rem"} borderColor={"black"} backgroundColor={"#a4bd9d"} marginTop={"0.31rem"} borderRadius={"0.3rem"}>
+        <CardHeader backgroundColor={"#789d6d"} borderRadius={"0.3rem"}><Heading size='md'>Register waste</Heading></CardHeader>
          <Form>
            
-          <Stack marginTop={"1rem"} marginLeft={"0.2rem"}>
+          <Stack >
            
            <label htmlFor="Quantity">Quantity  </label>
-           <Field id="quantity" type="number" name="quantity" placeholder="2" />
+           <Field size={"inherit"} id="quantity" type="number" name="quantity" placeholder="2" />
           
            <label htmlFor="incidentDate">Date of incident </label>
            <Field id="incidentDate" type="date" name="incidentDate" />
@@ -83,10 +83,10 @@ var today = new Date().toISOString().slice(0, 19).replace('T', ' ');
              placeholder="what happend?"
              type="text"
            />
-           
+           <Button type="submit">Submit</Button>
            </Stack>
  
-           <Button marginTop={"0.3rem"} type="submit">Submit</Button>
+           
            
          </Form>
          </Card>

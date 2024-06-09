@@ -3,12 +3,12 @@ import React, { createContext, useContext, useState } from 'react';
 
 
 interface loggedInterface{
-  isAuthenticated: number;
-  setIsAuthenticated: (value: React.Dispatch<React.SetStateAction<any> >) => any;
+  isAuthenticated: boolean;
+  setIsAuthenticated: (value: React.Dispatch<React.SetStateAction<boolean> >) => boolean;
 }
 export const DefaultContextValue: loggedInterface = {
-  isAuthenticated: 1,
-  setIsAuthenticated: () => 2
+  isAuthenticated: false,
+  setIsAuthenticated: () => false
 }
 export const AuthContext = createContext<loggedInterface>(DefaultContextValue);
 

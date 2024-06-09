@@ -33,6 +33,10 @@ export const FoodItems = () => {
 
         try {
           const response = await fetch(url);
+
+            
+           
+
           if (!response.ok) {
             console.log("failed response")
               throw new Error(
@@ -64,8 +68,7 @@ export const FoodItems = () => {
             if (!response.ok) {
               console.log("failed response")
                 throw new Error(
-                    `Unable to Fetch Data, Please check URL
-                    or Network connectivity!!`
+                    `errorerror`
                 );
             }
             const data = await response.json();
@@ -104,7 +107,7 @@ function handleClickFoodItems(action: string, id: number){
 return (
     
     <TabPanel onClick={() => handleClickFoodItems("fetch", 0)}>
-    <Grid width={"25rem"} templateColumns='repeat(2, 1fr)' gap={3}>
+    <Grid width={"inherit"} templateColumns='repeat(2, 1fr)' gap={3}>
   
   {foodItem.map((item)=> (
     <Card backgroundColor={"#a4bd9d"} key={item.id} marginTop={"2rem"} borderRadius={"1rem"}>

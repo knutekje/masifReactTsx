@@ -1,4 +1,4 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs, Image } from "@chakra-ui/react";
+import { Tab, TabList, TabPanel, TabPanels, Tabs, Image, FormLabel } from "@chakra-ui/react";
 import { Box, CardHeader, Grid, Card, CardBody, CardFooter, Text, Heading,
     Button, Link,}
    from '@chakra-ui/react';
@@ -42,14 +42,17 @@ function Incident(){
       }
       
     return(   <TabPanel onClick={handleClickIncident}> 
-        <Grid width={"25rem"}  templateColumns='repeat(3, 1fr)' gap={3}>
+        <Grid width={"inherit"}  templateColumns='repeat(3, 1fr)' gap={3} marginTop={"0.31rem"}>
       
       {incident.map((item)=> (
-        <Card key={item.foodID} marginTop={"2rem"} borderRadius={"1rem"}>
-          <Link><CardHeader backgroundColor={"#789d6d"} borderRadius={"1rem"}><Heading size='md'> {item.valueIncident}</Heading></CardHeader></Link>
+        <Card key={item.reportID}  borderRadius={"1rem"}>
+          <Link><CardHeader backgroundColor={"#789d6d"} borderRadius={"1rem"}><Heading size='md'> {item.reportID}</Heading></CardHeader></Link>
     
       <CardBody>
-        <Text textOverflow={"clip"} flexWrap={"wrap"}>{item.foodID}</Text>
+        <Text textOverflow={"clip"} flexWrap={"wrap"}>valueIncident: {item.valueIncident}</Text>
+        <Text textOverflow={"clip"} flexWrap={"wrap"}>itemPrice: {item.itemPrice}</Text>
+        <Text textOverflow={"clip"} flexWrap={"wrap"}>identityUser: {item.identityUser}</Text>
+
      
         
       </CardBody>
