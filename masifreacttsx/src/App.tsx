@@ -17,7 +17,7 @@ function App() {
   return (
     
 
-    <Center fontFamily={"lato"}>
+    <Center fontFamily={"Ariel"}>
       <Grid>
         <UserContextProvider>
         <Header />

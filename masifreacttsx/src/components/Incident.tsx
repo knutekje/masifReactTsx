@@ -39,7 +39,8 @@ function Incident(){
        
       }
       
-    return(   <TabPanel onClick={handleClickIncident}> 
+    return(   
+    <TabPanel onClick={handleClickIncident}> 
         <Grid width={"inherit"}  templateColumns='repeat(3, 1fr)' gap={3} marginTop={"0.31rem"}>
       
       {incident.map((item)=> (

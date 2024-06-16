@@ -1,8 +1,9 @@
-import { Grid, Link, Tab, TabList, TabPanel, TabPanels, Tabs, useStatStyles } from "@chakra-ui/react";
+import { Flex, Grid, Link, Tab, TabList, TabPanel, TabPanels, Tabs, useStatStyles } from "@chakra-ui/react";
 import Report from "./Report";
 import Incident from "./Incident";
 import { FoodItems } from "./FoodItems";
 import { SubmitReport } from "./SubmitReport";
+import UploadFile from "./UploadFile";
 
 
 export const TabNav =  () =>   {
@@ -23,8 +24,7 @@ return(
     <Incident/>
     <FoodItems/>
     
-     <SubmitReport/>
-    
+    <SubmitReport/>
   </TabPanels>
 </Tabs>
 )

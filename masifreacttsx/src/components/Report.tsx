@@ -22,14 +22,7 @@ interface reportInterface {
 
 
 function Report(){
-  interface foodInterface {
-    id: number;
-    title: string,
-    price: number,
-    unit: string,
-    supplier: string;
-    externalID: string;
-    }
+  
   
 
     const [report, setReport] = useState<Array<reportInterface>>([]);

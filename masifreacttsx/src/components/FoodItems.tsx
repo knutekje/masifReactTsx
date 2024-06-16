@@ -42,8 +42,6 @@ export const FoodItems = () => {
             
           );
 
-            
-           
 
           if (!response.ok) {
             console.log("failed response")
@@ -69,7 +67,9 @@ export const FoodItems = () => {
           const response = await fetch(url + "/" +id, {
             method: 'DELETE',
             headers: {
-              Accept: 'application/json'
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + fill.user?.token as string,
               
             }
           });
@@ -115,6 +115,7 @@ function handleClickFoodItems(action: string, id: number){
 return (
     
     <TabPanel onClick={() => handleClickFoodItems("fetch", 0)}>
+      
     <Grid width={"inherit"} templateColumns='repeat(2, 1fr)' gap={3}>
   
   {foodItem.map((item)=> (

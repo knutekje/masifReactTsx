@@ -1,9 +1,10 @@
 
-import { Formik, Field, Form, FormikHelpers } from 'formik';
+import { Formik, Field, Form, FormikHelpers, FormikErrors } from 'formik';
 import { Button } from '@chakra-ui/button';
 import { Card, CardHeader, Grid, GridItem, Heading, Stack, TabPanel, Textarea } from '@chakra-ui/react';
-import { useContext } from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 import { UserContext } from './UserContext';
+import UploadFile from './UploadFile';
  
  interface Values {
   pictureId: string,
@@ -22,15 +23,60 @@ var today = new Date().toISOString().slice(0, 19).replace('T', ' ');
  export const SubmitReport = () => {
   let fill = useContext(UserContext);  
 
+  
+    const [file, setFile] = useState<File | null>(null);
+    const [status, setStatus] = useState<
+    "initial" | "uploading" | "success" | "fail"
+  >("initial");
+  
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (e.target.files) {
+        setStatus("initial");
+        setFile(e.target.files[0]);
+      }
+    }
 
+      
+    const handleUpload = async () => {
+    
+      if (file) {
+        setStatus("uploading");
   
+        const formData = new FormData();
+        formData.append("file", file);
   
+        try {
+          const result = await fetch("http://localhost:5223/upload", {
+            method: "POST",
+            body: formData,
+          });
+  
+          const data = await result.json();
+  
+          console.log(data);
+          setStatus("success");
+        } catch (error) {
+          console.error(error);
+          setStatus("fail");
+        }
+      };
+      } 
+    
+  
+
+      
+      
+      
+    
+    
+
 
 
 
    return (
      <TabPanel>
-       <Grid width={"inherit"}  templateColumns='repeat(1, 1fr)' gap={3}>
+       <Grid width={"inherit"}  
+       >
 
        <Formik
          initialValues={{
@@ -48,7 +94,6 @@ var today = new Date().toISOString().slice(0, 19).replace('T', ' ');
            { setSubmitting }: FormikHelpers<Values>
          ) => {        
            setTimeout(() => {
-            console.log(values)
               fetch("http://localhost:5223/api/Report",{
                 method: 'POST',
                 headers: {
@@ -65,7 +110,7 @@ var today = new Date().toISOString().slice(0, 19).replace('T', ' ');
                   description: values.description,})
               })
               ;
-            
+            handleUpload();
            }, 0);
          }}
        >
@@ -76,7 +121,7 @@ var today = new Date().toISOString().slice(0, 19).replace('T', ' ');
           <Stack >
            
            <label htmlFor="Quantity">Quantity  </label>
-           <Field size={"inherit"} id="quantity" type="number" name="quantity" placeholder="2" />
+           <Field  id="quantity" type="number" name="quantity" placeholder="2" />
           
            <label htmlFor="incidentDate">Date of incident </label>
            <Field id="incidentDate" type="date" name="incidentDate" />
@@ -88,6 +133,8 @@ var today = new Date().toISOString().slice(0, 19).replace('T', ' ');
              placeholder="what happend?"
              type="text"
            />
+           <input id="file" type="file" onChange={handleFileChange} />
+
            <Button type="submit">Submit</Button>
            </Stack>
  
@@ -98,8 +145,7 @@ var today = new Date().toISOString().slice(0, 19).replace('T', ' ');
        </Formik>
        </Grid>
      </TabPanel>
-   );
- };
-
+   );}
+ 
 
 

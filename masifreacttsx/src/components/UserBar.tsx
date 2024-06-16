@@ -1,6 +1,6 @@
 import { HStack } from "@chakra-ui/layout"
-import { Box, Button, FormControl, FormLabel, Input, VStack } from "@chakra-ui/react"
-import { Field, Form, Formik, FormikHelpers, FormikValues } from "formik"
+import { Box, Button, Flex,  Square } from "@chakra-ui/react"
+import { Field, Form, Formik } from "formik"
 import { useContext } from "react";
 import { setLocalStorage, getLocalStorage } from "./LocalStorage";
 import { UserContext, UserProps } from "./UserContext";
@@ -46,7 +46,6 @@ export const UserBar = () => {
                     })
                     const logged = await response.json();
                     if (response.ok){
-                        console.log(logged.accessToken)
                         fill.setUser({name: values.email,
                             token: logged.accessToken})
                         }
@@ -59,20 +58,25 @@ export const UserBar = () => {
                     
                     
                 
-
-                
             >   
-            <Box boxSize={"inherit"} backgroundColor={"#a4bd9d"}borderWidth={"0.1rem"} borderColor={"black"}  borderRadius={"0.3rem"}>
+            <Flex width={"inherit"} backgroundColor={"#a4bd9d"}borderWidth={"0.1rem"} borderColor={"black"}  borderRadius={"0.3rem"}>
                 <Form>
+                    <Square>
                     <label  htmlFor="email">Username  </label>
-                    <Field size={"inherit"} inlineSize={"max-content"} id="email" type="email" name="email"/>
+                    <Field id="email" type="email" name="email"/>
+                    </Square>
+                    <Square>
                     <label htmlFor="password">Password </label>
-                    <Field size={"inherit"} inlineSize={"max-content"} id="password" type="password" name="password"/>
-                    <Button size={"inherit"} inlineSize={"max-content"} type="submit">Login</Button>
+                    <Field   id="password" type="password" name="password"/>
+                    </Square>
+                    <Square>
+                    <Button   type="submit">Login</Button>
+                    </Square>
+                    
                 </Form>
-                </Box>
+                </Flex>
             </Formik>
         </>
     )}
-    else {return (<Box>Logged in as {fill.user.name} </Box>)}    
+    else {return (<Flex boxSize={"inherit"} backgroundColor={"#a4bd9d"}borderWidth={"0.1rem"} borderColor={"black"}  borderRadius={"0.3rem"}>Logged in as {fill.user.name} </Flex>)}    
 }
