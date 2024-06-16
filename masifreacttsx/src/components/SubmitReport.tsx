@@ -5,6 +5,7 @@ import { Card, CardHeader, Grid, GridItem, Heading, Stack, TabPanel, Textarea } 
 import { ChangeEvent, useContext, useState } from 'react';
 import { UserContext } from './UserContext';
 import UploadFile from './UploadFile';
+import { number } from 'yup';
  
  interface Values {
   pictureId: string,
@@ -17,7 +18,7 @@ import UploadFile from './UploadFile';
 }
 
 
-var today = new Date().toISOString().slice(0, 19).replace('T', ' ');
+var today = new Date().toISOString().slice(0, 19);
  
  
  export const SubmitReport = () => {
@@ -29,6 +30,9 @@ var today = new Date().toISOString().slice(0, 19).replace('T', ' ');
     "initial" | "uploading" | "success" | "fail"
   >("initial");
   
+    const [PictureId, setPictureDbId] = useState();
+
+
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.files) {
         setStatus("initial");
@@ -41,10 +45,11 @@ var today = new Date().toISOString().slice(0, 19).replace('T', ' ');
     
       if (file) {
         setStatus("uploading");
-  
+
+     
         const formData = new FormData();
         formData.append("file", file);
-  
+        
         try {
           const result = await fetch("http://localhost:5223/upload", {
             method: "POST",
@@ -52,27 +57,46 @@ var today = new Date().toISOString().slice(0, 19).replace('T', ' ');
           });
   
           const data = await result.json();
-  
+         
+          
+
           console.log(data);
           setStatus("success");
         } catch (error) {
           console.error(error);
           setStatus("fail");
         }
+        pictureSave(file);
       };
       } 
-    
-  
 
+      const pictureSave = (file: File) => {
+        fetch("http://localhost:5223/api/Picture", {
+          method: "POST",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            id: 0,
+            fileName: file.name,
+            filePath: "string",
+            description: file.type
+          })
+        })
+        .then((response)=> response.json())
+        .then((response) => setPictureDbId(response.id))
+        
+         
+        
+        
+   
       
+      }
       
+        
       
     
-    
-
-
-
-
    return (
      <TabPanel>
        <Grid width={"inherit"}  
@@ -93,7 +117,8 @@ var today = new Date().toISOString().slice(0, 19).replace('T', ' ');
            values: Values,
            { setSubmitting }: FormikHelpers<Values>
          ) => {        
-           setTimeout(() => {
+           setTimeout(async () => {
+            await handleUpload();
               fetch("http://localhost:5223/api/Report",{
                 method: 'POST',
                 headers: {
@@ -101,8 +126,8 @@ var today = new Date().toISOString().slice(0, 19).replace('T', ' ');
                   'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                  pictureId: values.pictureId,
-                  //reportedDate: '',
+                  pictureId: PictureId,
+                  reportedDate: today,
                   incidentDate: values.incidentDate,
                   quantity: values.quantity,
                   userID: 0,
@@ -110,7 +135,7 @@ var today = new Date().toISOString().slice(0, 19).replace('T', ' ');
                   description: values.description,})
               })
               ;
-            handleUpload();
+            
            }, 0);
          }}
        >

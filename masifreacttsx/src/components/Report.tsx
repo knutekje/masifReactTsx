@@ -4,6 +4,7 @@ import { CardHeader, Card, CardBody, CardFooter, Text, Heading,
    from '@chakra-ui/react';
 import {  SetStateAction,  useContext,  useState } from "react";
 import { UserContext } from "./UserContext";
+import { PictureFetch } from "./PictureFetch";
 
 
 interface reportInterface {
@@ -61,7 +62,8 @@ function Report(){
         <Text textOverflow={"clip"} flexWrap={"wrap"}>{item.quantity}</Text>
         <Text textOverflow={"clip"} flexWrap={"wrap"}>{item.description}</Text>
         <Text textOverflow={"clip"} flexWrap={"wrap"}>{item.reportedDate}</Text>
-
+        <Text textOverflow={"clip"} flexWrap={"wrap"}>{item.pictureId}</Text>
+<PictureFetch id={item.pictureId}/>
         
      
       </CardBody>
