@@ -6,7 +6,7 @@ import {  CardHeader, Grid, Card, CardBody, CardFooter, Text, Heading,
    from '@chakra-ui/react';
 import {  useState } from "react";
 
-
+const token = "CfDJ8MeD4YBqL-1OqiwjZtZx7Ucrm4wmlG7M9GewAJnK4xxaYO4YDrbtk7oCfXddlOuwDpbyUqJecTsEN_DXLRdFlFUQo358qDA-RO4E75sw6EqtOO3qHS8H1JWRxtGHU6z-QauWrqdBiNmDtEKLRSCz0RxUl_tq4_H4GGe0iaU9FFimfzD7rJmDJjzsFu0RveQOS7z-RFW7AemZIFUz34n67gTbxxnqvWRC-UMRw16I4eAzVqeo1glzAnI-N36hUye4Z80oT3aPVqcO6no3r7L1NOPYDN8UkBn_ahhEJnv0NMO14GKf7SOz8w7W4_N42FGb_7nytZfCt2FebCVqBkb4hWuxEuI4X0JYcrx-0_AYPqeUqFum932LRmMKiRKY_yu0FioSqwhcrnc4LoaFIYfcWXr9x9K883acNLGzJaMcE7oywnnmgLjZ7kdDewrqq8Cw6v6igZkZP4Nfr2I8nwLrNXP2NuuX_qTVmC6HWgJpZavnti_tmYwkGii0YeJnRz0TYlD6-ydzTlzzC8Aw_n2_a5Zk2yTEponRnesInbG9MzoNpM50VbxI-7WJGzJLef2htXI1R0ap7-faG9p1b8wjWHJs0tgoHnm_uWeSDyTVGLWM_B9qZXInqilpiSmp9hhNBDtudwFsX3ixBRaMwzLTEJH-HOHsr3OieCI98vNQ34QT8Nii9Iq6vcPJQleDzMjSkA"
 
 interface foodInterface {
   id: number;
@@ -32,7 +32,14 @@ export const FoodItems = () => {
         case "fetch":
 
         try {
-          const response = await fetch(url);
+          const response = await fetch(url, {
+            headers: {
+              'authorization': token,
+              "Accept": "application/json"
+          }}
+            
+            
+          );
 
             
            

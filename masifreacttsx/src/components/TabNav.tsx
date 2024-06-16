@@ -1,4 +1,4 @@
-import { Grid, Tab, TabList, TabPanel, TabPanels, Tabs, useStatStyles } from "@chakra-ui/react";
+import { Grid, Link, Tab, TabList, TabPanel, TabPanels, Tabs, useStatStyles } from "@chakra-ui/react";
 import Report from "./Report";
 import Incident from "./Incident";
 import { FoodItems } from "./FoodItems";
@@ -11,7 +11,7 @@ export const TabNav =  () =>   {
 return(
 <Tabs variant='soft-rounded' colorScheme='green'>
   <TabList marginTop={"1rem"}>
-    <Tab>Report</Tab>
+    <Link><Tab>Report</Tab></Link>
     <Tab>Incident</Tab>
     <Tab>Fooditems</Tab>
     <Tab>Submitreport</Tab>
