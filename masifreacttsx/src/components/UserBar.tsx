@@ -2,8 +2,8 @@ import { HStack } from "@chakra-ui/layout"
 import { Box, Button, FormControl, FormLabel, Input, VStack } from "@chakra-ui/react"
 import { Field, Form, Formik, FormikHelpers, FormikValues } from "formik"
 import { useContext } from "react";
-import { AuthContext, useAuth } from "./UserContext";
 import { setLocalStorage, getLocalStorage } from "./LocalStorage";
+import { UserContext, UserProps } from "./UserContext";
 
 
 interface Values {
@@ -11,14 +11,11 @@ interface Values {
     password: string;
   }
 
-
-  
-  
   
 export const UserBar = () => {
-    let logginStatus = useAuth();
-
-    if(logginStatus.isAuthenticated === false){
+    const fill = useContext(UserContext);  
+    
+    if(fill.user == null){
     return (
         <>
             <Formik
@@ -31,8 +28,7 @@ export const UserBar = () => {
                     values: Values,
                     
                 ) => {
-                    console.log(values)
-                    fetch("http://localhost:5223/login",{
+                    const response = await fetch("http://localhost:5223/login",{
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',
@@ -48,13 +44,23 @@ export const UserBar = () => {
                             
                             
                     })
-                    .then(response => (console.log(response.json(
-                    ))))
+                    const logged = await response.json();
+                    if (response.ok){
+                        console.log(logged.accessToken)
+                        fill.setUser({name: values.email,
+                            token: logged.accessToken})
+                        }
+                        
+                    }
+                 
+                   
+                     
+                    }
                     
                     
-                }
+                
 
-                }
+                
             >   
             <Box boxSize={"inherit"} backgroundColor={"#a4bd9d"}borderWidth={"0.1rem"} borderColor={"black"}  borderRadius={"0.3rem"}>
                 <Form>
@@ -68,5 +74,5 @@ export const UserBar = () => {
             </Formik>
         </>
     )}
-    else {return (<Box>Logged in</Box>)}    
+    else {return (<Box>Logged in as {fill.user.name} </Box>)}    
 }

@@ -3,7 +3,6 @@ import { Box, CardHeader, Grid, Card, CardBody, CardFooter, Text, Heading,
     Button, Link,}
    from '@chakra-ui/react';
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "./UserContext";
 
 interface incidentInterface{
     reportID: number,
@@ -17,7 +16,6 @@ interface incidentInterface{
 function Incident(){
     const [incident, setIncident] = useState<Array<incidentInterface>>([]);
 
-    let something = useContext(AuthContext);
 
     async function fetchIncidents(url: string): Promise<any> {
         try {

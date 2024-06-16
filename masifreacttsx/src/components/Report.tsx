@@ -2,8 +2,8 @@ import {  Button, Grid, TabPanel } from "@chakra-ui/react";
 import { CardHeader, Card, CardBody, CardFooter, Text, Heading,
      Link,}
    from '@chakra-ui/react';
-import {  SetStateAction, useContext, useState } from "react";
-import { AuthContext } from "./UserContext";
+import {  SetStateAction,  useContext,  useState } from "react";
+import { UserContext } from "./UserContext";
 
 
 interface reportInterface {
@@ -20,8 +20,8 @@ interface reportInterface {
 
 
 
-function Report(){
 
+function Report(){
   interface foodInterface {
     id: number;
     title: string,

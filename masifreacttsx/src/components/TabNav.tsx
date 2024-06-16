@@ -3,8 +3,6 @@ import Report from "./Report";
 import Incident from "./Incident";
 import { FoodItems } from "./FoodItems";
 import { SubmitReport } from "./SubmitReport";
-import { useContext } from "react";
-import { AuthContext } from "./UserContext";
 
 
 export const TabNav =  () =>   {
@@ -12,7 +10,7 @@ return(
 <Tabs variant='soft-rounded' colorScheme='green'>
   <TabList marginTop={"1rem"}>
     <Link><Tab>Report</Tab></Link>
-    <Tab>Incident</Tab>
+    <Tab> Incident</Tab>
     <Tab>Fooditems</Tab>
     <Tab>Submitreport</Tab>
    

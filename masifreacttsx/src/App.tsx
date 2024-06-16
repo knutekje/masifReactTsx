@@ -6,8 +6,11 @@ import Report from "./components/Report";
 import Incident from "./components/Incident";
 import { FoodItems } from "./components/FoodItems";
 import { SubmitReport } from "./components/SubmitReport";
-import { AuthContext, AuthProvider, useAuth } from './components/UserContext';
 import { UserBar } from './components/UserBar';
+import { UserContext } from './components/UserContext';
+import UserContextProvider from './components/UserContext';
+
+
 function App() {
 
 
@@ -16,11 +19,11 @@ function App() {
 
     <Center fontFamily={"lato"}>
       <Grid>
-        <AuthProvider>
+        <UserContextProvider>
         <Header />
         <UserBar/>
         <TabNav />
-        </AuthProvider>
+        </UserContextProvider>
         </Grid>
    </Center>
   );

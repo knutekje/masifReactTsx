@@ -1,29 +1,44 @@
+import {createContext, useEffect, useState} from 'react'
 
-import React, { createContext, useContext, useState } from 'react';
 
+export type UserInterface = {
+    userid: number,
+    username: string,
+    token: string,
 
-interface loggedInterface{
-  isAuthenticated: boolean;
-  setIsAuthenticated: (value: React.Dispatch<React.SetStateAction<boolean> >) => boolean;
 }
-export const DefaultContextValue: loggedInterface = {
-  isAuthenticated: false,
-  setIsAuthenticated: () => false
+
+export type UserProps = {
+  user: {
+      name?: string,
+      token?: string
+  } | null,
+  setUser: React.Dispatch<React.SetStateAction<{} | null>>
+} 
+
+export const UserContext  = createContext<UserProps>({} as UserProps)
+
+type UserContextProviderProps = {
+    children: React.ReactNode
+
 }
-export const AuthContext = createContext<loggedInterface>(DefaultContextValue);
 
-export const AuthProvider = ({ children }: any) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(DefaultContextValue);
+const UserContextProvider = ({children}: UserContextProviderProps) => {
+    const [user, setUser] = useState<{} | null>(null)
 
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem("user");
+        if (loggedInUser) {
+        setUser(JSON.parse(loggedInUser));
+        }
+        
+    }, [])
 
+    return (
+        <UserContext.Provider value={{user, setUser}}>
+            {children}
+        </UserContext.Provider>
+    )
+}
 
-  return (
-    <AuthContext.Provider value={DefaultContextValue}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
-
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export default UserContextProvider

@@ -2,6 +2,8 @@
 import { Formik, Field, Form, FormikHelpers } from 'formik';
 import { Button } from '@chakra-ui/button';
 import { Card, CardHeader, Grid, GridItem, Heading, Stack, TabPanel, Textarea } from '@chakra-ui/react';
+import { useContext } from 'react';
+import { UserContext } from './UserContext';
  
  interface Values {
   pictureId: string,
@@ -18,6 +20,9 @@ var today = new Date().toISOString().slice(0, 19).replace('T', ' ');
  
  
  export const SubmitReport = () => {
+  let fill = useContext(UserContext);  
+
+
   
   
 
