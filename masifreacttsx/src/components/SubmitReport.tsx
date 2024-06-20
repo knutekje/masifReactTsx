@@ -89,7 +89,8 @@ var today = new Date().toISOString().slice(0, 19);
           });
   
           const data = await result.json();
-          setPictureDbId(data.pictureId)
+          console.log(data.id)
+          setPictureDbId(data.id)
           
 
           console.log(data);
@@ -125,8 +126,9 @@ var today = new Date().toISOString().slice(0, 19);
            { setSubmitting }: FormikHelpers<Values>
          ) => {        
            setTimeout(async () => {
-            await handleUpload();
-              fetch("http://localhost:5223/api/Report",{
+           await handleUpload();
+            console.log("now im here");
+              await fetch("http://localhost:5223/api/Report",{
                 method: 'POST',
                 headers: {
                   'Accept': 'application/json',
