@@ -1,9 +1,10 @@
-import {  Button, Grid, TabPanel } from "@chakra-ui/react";
+import {  Button, Grid, Img, TabPanel } from "@chakra-ui/react";
 import { CardHeader, Card, CardBody, CardFooter, Text, Heading,
      Link,}
    from '@chakra-ui/react';
 import {  SetStateAction,  useContext,  useState } from "react";
 import { UserContext } from "./UserContext";
+import { PictureFetch } from "./PictureFetch";
 
 
 interface reportInterface {
@@ -47,6 +48,8 @@ function Report(){
         fetchReports('http://localhost:5223/api/Report');
        
       }
+
+      
     
 
     return(    
@@ -61,7 +64,9 @@ function Report(){
         <Text textOverflow={"clip"} flexWrap={"wrap"}>{item.quantity}</Text>
         <Text textOverflow={"clip"} flexWrap={"wrap"}>{item.description}</Text>
         <Text textOverflow={"clip"} flexWrap={"wrap"}>{item.reportedDate}</Text>
-
+        
+        
+        <Img boxSize='100px' src={`http://localhost:5223/api/Bilde/`+ item.pictureId}  />
         
      
       </CardBody>

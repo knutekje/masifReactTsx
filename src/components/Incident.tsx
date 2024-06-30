@@ -3,6 +3,7 @@ import { Box, CardHeader, Grid, Card, CardBody, CardFooter, Text, Heading,
     Button, Link,}
    from '@chakra-ui/react';
 import { useContext, useEffect, useState } from "react";
+import { SelectFood } from "./SelectFood";
 
 interface incidentInterface{
     reportID: number,
@@ -53,7 +54,6 @@ function Incident(){
         <Text textOverflow={"clip"} flexWrap={"wrap"}>identityUser: {item.identityUser}</Text>
 
      
-        
       </CardBody>
       <CardFooter>
      

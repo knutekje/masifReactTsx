@@ -9,20 +9,25 @@ import { SubmitReport } from "./components/SubmitReport";
 import { UserBar } from './components/UserBar';
 import { UserContext } from './components/UserContext';
 import UserContextProvider from './components/UserContext';
-
+import { useContext } from 'react';
 
 function App() {
-
+  const fill = useContext(UserContext);  
 
   return (
     
 
     <Center fontFamily={"Ariel"}>
       <Grid>
+        
         <UserContextProvider>
+        
         <Header />
-        <UserBar/>
-        <TabNav />
+        {fill.user == null ? (<UserBar/> 
+      ) : (<TabNav />)}
+
+     
+        
         </UserContextProvider>
         </Grid>
    </Center>

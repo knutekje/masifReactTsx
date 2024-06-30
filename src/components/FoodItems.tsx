@@ -116,7 +116,7 @@ return (
     
     <TabPanel onClick={() => handleClickFoodItems("fetch", 0)}>
       
-    <Grid width={"inherit"} templateColumns='repeat(2, 1fr)' gap={3}>
+    <Grid width={"inherit"} templateColumns='repeat(2, 2fr 1fr)' gap={3}>
   
   {foodItem.map((item)=> (
     <Card backgroundColor={"#a4bd9d"} key={item.id} marginTop={"2rem"} borderRadius={"1rem"}>

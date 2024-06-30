@@ -4,6 +4,7 @@ import { Center, Grid, Image, Text
  } from "@chakra-ui/react";
 import { UserContext } from "./UserContext";
 import { useContext } from "react";
+import { SelectFood } from "./SelectFood";
 
 
 
